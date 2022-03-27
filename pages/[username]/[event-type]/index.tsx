@@ -18,7 +18,7 @@ const AppointmentPage = () => {
       username = urlElements[urlElements.length - 2];
       try {
         const res = await axios.get(
-          `http://${host}/api/booking/${username}/15min`
+          `https://${host}/api/booking/${username}/15min`
         );
         setUser(res.data.user);
         console.log("ibyg", res.data.user);

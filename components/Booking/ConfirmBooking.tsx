@@ -45,7 +45,10 @@ const ConfirmBooking: NextPage<Props> = ({ name, date, userId }) => {
 
     console.log("bjgik", form);
     try {
-      const res = await axios.post(`http://${host}/api/books/submitbook`, form);
+      const res = await axios.post(
+        `https://${host}/api/books/submitbook`,
+        form
+      );
       setStatus(res.status);
       console.log(res);
     } catch (error: any) {
