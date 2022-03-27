@@ -20,11 +20,9 @@ const Login: React.FC = () => {
   const [username, setUsername] = useState("");
 
   const handleSubmit = async () => {
+    const host = window.location.host;
     try {
-      const res = await axios.post(
-        `http://localhost:3000/api/auth/login`,
-        form
-      );
+      const res = await axios.post(`http://${host}/api/auth/login`, form);
       setStatus(res.status);
       setUsername(res.data.user.username);
       toast.success(res.data.massage);

@@ -10,13 +10,15 @@ const AppointmentPage = () => {
 
   useEffect(() => {
     const fetchUser = async (path: string) => {
+      const host = window.location.host;
+
       const ment = path;
       console.log(ment);
       const urlElements = url.split("/");
       username = urlElements[urlElements.length - 2];
       try {
         const res = await axios.get(
-          `http://localhost:3000/api/booking/${username}/15min`
+          `http://${host}/api/booking/${username}/15min`
         );
         setUser(res.data.user);
         console.log("ibyg", res.data.user);
