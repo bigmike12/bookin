@@ -25,7 +25,7 @@ const Home: NextPage = () => {
 
     e.preventDefault();
     try {
-      const res = await axios.post(`${host}/api/auth/register`, form);
+      const res = await axios.post(`http://${host}/api/auth/register`, form);
       toast(res.data.massage);
       router.push("/auth/login");
     } catch (error: any) {
