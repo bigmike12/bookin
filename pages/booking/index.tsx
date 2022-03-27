@@ -10,7 +10,7 @@ const Booking = ({ user }: any) => {
 
     const testing = async () => {
       try {
-        const res = await axios.post(`http://${host}/api/auth/userid`, {
+        const res = await axios.post(`https://${host}/api/auth/userid`, {
           username: user,
         });
         setBooks(res.data.books.bookings);
