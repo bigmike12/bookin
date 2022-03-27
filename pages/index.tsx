@@ -21,12 +21,11 @@ const Home: NextPage = () => {
   const router = useRouter();
 
   const handleSubmit = async (e: any) => {
+    const host = window.location.host;
+
     e.preventDefault();
     try {
-      const res = await axios.post(
-        `http://localhost:3000/api/auth/register`,
-        form
-      );
+      const res = await axios.post(`${host}/api/auth/register`, form);
       toast(res.data.massage);
       router.push("/auth/login");
     } catch (error: any) {
