@@ -2,10 +2,10 @@ import React from "react";
 import { BiTimeFive } from "react-icons/bi";
 import { IoIosPeople } from "react-icons/io";
 
-const EventCard = ({ types }) => {
+const EventCard = ({ types }: any) => {
   return (
     <div>
-      {types.map((type) => (
+      {types.map((type: any) => (
         <div
           key={type.id}
           className="flex flex-col bg-gray-100 border rounded-md p-1"

@@ -22,6 +22,10 @@ module.exports = {
     ],
     "require-jsdoc": 0,
     "no-var": 0,
+    "spaced-comment": ["error", "always", { exceptions: ["-", "+"] }],
+    "no-extra-boolean-cast": "error",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
   },
   settings: {
     react: {
