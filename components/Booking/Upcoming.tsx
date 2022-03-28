@@ -10,9 +10,9 @@ const Upcoming = ({ books }: any) => {
         books?.map((book: any) => (
           <div
             key={book.id}
-            className="flex mt-4 bg-white border rounded-md p-3"
+            className="flex mt-4 bg-white border rounded-md p-3 sm:p-3 h-[150px] sm:h-[85px]"
           >
-            <div className="mr-10 text-xs">
+            <div className="mr-10 sm:mr-[80px] text-[10px] sm:text-xs w-[20px] sm:w-[80px]">
               <p className="font-medium">{`${dayjs(book.startTime).format(
                 "MMM D, YYYY"
               )}`}</p>
@@ -23,20 +23,24 @@ const Upcoming = ({ books }: any) => {
               ).get("hour")}${`:`}${dayjs(book.endTime).get("minutes")}`}</p>
             </div>
 
-            <div className="text-xs">
-              <p className="font-medium p-[1px]">{book.title}</p>
-              <p className="text-gray-400 p-[1px]">{`"${book.description}"`}</p>
-              <p className="p-[1px]">{book.attendeEmail}</p>
+            <div className="sm:text-xs text-xs w-[100px] sm:w-[400px]">
+              <p className="font-medium p-[1px] text-[10px] sm:text-[12px]">
+                {book.title}
+              </p>
+              <p className="text-gray-400 p-[1px] text-[10px] sm:text-[12px]">{`"${book.description}"`}</p>
+              <p className="p-[1px] text-[10px] sm:text-[12px]">
+                {book.attendeEmail}
+              </p>
             </div>
 
-            <div className="flex items-start ml-auto">
-              <div className="flex items-center px-2 py-2 rounded-md border mr-2 hover:bg-gray-200">
-                <GrFormClose className="mr-1" />
-                <p className="text-xs">Cancel</p>
+            <div className="sm:flex sm:flex-row sm:items-start sm:ml-auto ml-auto">
+              <div className="flex items-center justify-center py-2 rounded-md border mr-2 hover:bg-gray-200 w-[80px] sm:w-[100px] mb-3">
+                <GrFormClose className="mr-1 sm:text-xs text-[10px]" />
+                <p className="sm:text-xs text-[10px]">Cancel</p>
               </div>
-              <div className="flex items-center px-2 py-2 rounded-md border hover:bg-gray-200">
-                <AiOutlineClockCircle className="mr-1" />
-                <p className="text-xs">Reschedule</p>
+              <div className="flex items-center justify-center py-2 rounded-md border hover:bg-gray-200 w-[80px] sm:w-[100px]">
+                <AiOutlineClockCircle className="mr-1 sm:text-xs text-[10px]" />
+                <p className="sm:text-xs text-[10px]">Reschedule</p>
               </div>
             </div>
           </div>

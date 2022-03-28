@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { ImSpinner2 } from "react-icons/im";
 
 interface FormData {
   username: string;
@@ -18,15 +19,20 @@ const Home: NextPage = () => {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: any) => {
-    const host = window.location.host;
+    if (form.username === "" || form.email === "" || form.password === "") {
+      return toast.error("Please fill all fields");
+    }
+    setLoading(true);
 
     e.preventDefault();
     try {
-      const res = await axios.post(`https://${host}/api/auth/register`, form);
+      const res = await axios.post(`/api/auth/register`, form);
       toast(res.data.massage);
+      setLoading(false);
       router.push("/auth/login");
     } catch (error: any) {
       // toast.error(error.response.data.message);
@@ -35,20 +41,20 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen p-12">
-      <Toaster />
-      <div className="px-10 max-w-screen-sm">
+    <div className="mt-3 sm:flex sm:justify-center sm:items-center h-screen p-12">
+      <Toaster position="top-center" />
+      <div className="sm:px-10 sm:max-w-screen-sm mb-5">
         <h1 className="font-bold mb-3 text-lg">Bookin.com</h1>
-        <h2 className="text-4xl w-8/12 font-bold">
+        <h2 className="text-medium mb-2 sm:text-4xl w-8/12 font-bold">
           You're one step away from simpler scheduling.
         </h2>
-        <p className="py-6 w-10/12 text-sm font-light">
+        <p className="text-xs sm:py-6 sm:w-10/12 font-light">
           "I love being able to use a tool that just works, and that is open
           source. As a developer, I love being empowered to contribute to a tool
           that I use regularly."
         </p>
       </div>
-      <div className="pr-10 max-w-screen-sm">
+      <div className="mt-4 sm:pr-10 sm:max-w-screen-sm">
         <form
           className="border-2 rounded border-gray-200 p-4 text-xs bg-white"
           onSubmit={(e) => handleSubmit(e)}
@@ -76,7 +82,11 @@ const Home: NextPage = () => {
             className="border-2 rounded border-gray-200 p-2 w-full my-2 focus:invalid:border-pink-500"
           />
           <button className="border-3 rounded w-full bg-gray-900 text-white p-3 my-2">
-            Sign up for free
+            {loading ? (
+              <ImSpinner2 className="animate-spin h-5 w-5 mr-3" />
+            ) : (
+              "Sign up for free"
+            )}
           </button>
           <div className="py-2">
             <p className="hover: cursor-default">

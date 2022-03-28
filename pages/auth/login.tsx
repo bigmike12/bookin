@@ -5,6 +5,7 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import Booking from "../booking";
+import { ImSpinner2 } from "react-icons/im";
 
 interface FormData {
   email: string;
@@ -18,14 +19,19 @@ const Login: React.FC = () => {
   });
   const [status, setStatus] = useState<number>();
   const [username, setUsername] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
-    const host = window.location.host;
+    if (form.email === "" || form.password === "") {
+      return toast.error("Please fill all fields");
+    }
+    setLoading(true);
     try {
-      const res = await axios.post(`https://${host}/api/auth/login`, form);
+      const res = await axios.post(`/api/auth/login`, form);
       setStatus(res.status);
       setUsername(res.data.user.username);
       toast.success(res.data.massage);
+      setLoading(false);
     } catch (error: any) {
       toast.error(error.response.data.message);
       console.log(error);
@@ -37,12 +43,14 @@ const Login: React.FC = () => {
       {status !== 200 ? (
         <div className="flex flex-col justify-center items-center h-screen w-screen">
           <div>
-            <h1 className="font-semibold text-lg mb-2 text-center">
+            <h1 className="font-bold text-base sm:text-lg mb-2 text-center">
               Bookin.com
             </h1>
-            <h2 className="text-2xl font-bold mb-4">Sign In to your account</h2>
+            <h2 className="font-medium sm:text-2xl sm:font-bold mb-4">
+              Sign In to your account
+            </h2>
           </div>
-          <div className="max-w-md w-2/4 flex-row bg-white p-5 rounded">
+          <div className="w-3/4 sm:max-w-md flex-row sm:w-full bg-white p-5 rounded">
             <div className="mb-2">
               <label className="block text-sm">Email Address</label>
               <input
@@ -62,10 +70,14 @@ const Login: React.FC = () => {
               />
             </div>
             <button
-              className="border-3 rounded w-full bg-gray-900 text-white p-2 my-2 text-sm"
+              className="border-3 rounded w-full bg-gray-900 text-white p-2 my-2 flex justify-center items-center"
               onClick={() => handleSubmit()}
             >
-              Sign In
+              {loading ? (
+                <ImSpinner2 className="animate-spin h-5 w-5 mr-3" />
+              ) : (
+                "Sign In"
+              )}
             </button>
           </div>
           <p className="text-xs mt-4 text-gray-600 cursor-default">

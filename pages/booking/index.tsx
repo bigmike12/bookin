@@ -6,11 +6,9 @@ const Booking = ({ user }: any) => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    const host = window.location.host;
-
     const testing = async () => {
       try {
-        const res = await axios.post(`https://${host}/api/auth/userid`, {
+        const res = await axios.post(`/api/auth/userid`, {
           username: user,
         });
         setBooks(res.data.books.bookings);
