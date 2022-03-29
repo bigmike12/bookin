@@ -26,7 +26,6 @@ interface Props {
 const ConfirmBooking: NextPage<Props> = ({ name, date, userId }) => {
   const future = dayjs(date).add(15, "minute").toString();
 
-  console.log("uhihoj", typeof userId);
   const title = "15 Minutes Meeting";
   const [status, setStatus] = useState<number>();
   const [form, setForm] = useState<FormData>({

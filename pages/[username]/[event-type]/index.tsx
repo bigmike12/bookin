@@ -17,7 +17,6 @@ const AppointmentPage = () => {
       try {
         const res = await axios.get(`/api/booking/${username}/15min`);
         setUser(res.data.user);
-        console.log("ibyg", res.data.user);
       } catch (error) {
         console.log(error);
       }

@@ -23,7 +23,7 @@ const Upcoming = ({ books }: any) => {
               ).get("hour")}${`:`}${dayjs(book.endTime).get("minutes")}`}</p>
             </div>
 
-            <div className="sm:text-xs text-xs w-[100px] sm:w-[400px]">
+            <div className="sm:text-xs text-xs w-[100px] sm:w-[400px] sm:ml-9">
               <p className="font-medium p-[1px] text-[10px] sm:text-[12px]">
                 {book.title}
               </p>

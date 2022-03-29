@@ -20,6 +20,5 @@ export default async function handler(
       eventTypes: true,
     },
   });
-  console.log(books);
   return res.status(200).json({ books });
 }
