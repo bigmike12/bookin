@@ -17,7 +17,7 @@ const SelectAppointment: NextPage<any> = ({ nextStep, setDate, date }) => {
             name="meeting-time"
             min="now"
             max="lastDay"
-            className="p-5 text-gray-700"
+            className="p-3 w-full sm:p-5 text-gray-700"
             onChange={(e) => setDate(e.target.value)}
           />
           <button

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import NotFoundPage from "../../404";
 import TimeBooking from "../../../components/Booking/TimeBooking";
+// import { GetStaticPaths } from "next";
 
 let username: string;
 const AppointmentPage = () => {
@@ -37,3 +38,10 @@ const AppointmentPage = () => {
 };
 
 export default AppointmentPage;
+
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   return {
+//     paths: [{ params: { username: `${username}` } }],
+//     fallback: false,
+//   };
+// };

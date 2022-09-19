@@ -5,7 +5,7 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import Booking from "../booking";
-import { ImSpinner2 } from "react-icons/im";
+import Icon from "../../assets/Icon";
 
 interface FormData {
   email: string;
@@ -28,36 +28,38 @@ const Login: React.FC = () => {
     setLoading(true);
     try {
       const res = await axios.post(`/api/auth/login`, form);
+      toast.success(res.data.message);
       setStatus(res.status);
       setUsername(res.data.user.username);
-      toast.success(res.data.massage);
       setLoading(false);
     } catch (error: any) {
       toast.error(error.response.data.message);
-      console.log(error);
+      setForm({ email: "", password: "" });
+      setLoading(false);
     }
   };
 
   return (
     <div>
+      <Toaster position="top-center" />
       {status !== 200 ? (
-        <div className="flex flex-col justify-center items-center h-screen w-screen">
+        <div className="flex flex-col items-center justify-center w-screen h-screen sm:h-screen">
           <div>
-            <h1 className="font-bold text-base sm:text-lg mb-2 text-center">
+            <h1 className="mb-2 text-base font-bold text-center sm:text-lg">
               Bookin.com
             </h1>
-            <h2 className="font-medium sm:text-2xl sm:font-bold mb-4">
+            <h2 className="mb-4 font-medium sm:text-2xl sm:font-bold">
               Sign In to your account
             </h2>
           </div>
-          <div className="w-3/4 sm:max-w-md flex-row sm:w-full bg-white p-5 rounded">
+          <div className="flex-row w-3/4 p-5 bg-white rounded sm:max-w-md sm:w-full">
             <div className="mb-2">
               <label className="block text-sm">Email Address</label>
               <input
                 type="email"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="border-2 rounded border-gray-200 p-1 my-2 w-full"
+                className="w-full p-1 my-2 border-2 border-gray-200 rounded"
               />
             </div>
             <div className="mb-2">
@@ -66,27 +68,28 @@ const Login: React.FC = () => {
                 type="password"
                 value={form.password}
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
-                className="border-2 rounded border-gray-200 p-1 my-2 w-full"
+                className="w-full p-1 my-2 border-2 border-gray-200 rounded"
               />
             </div>
             <button
-              className="border-3 rounded w-full bg-gray-900 text-white p-2 my-2 flex justify-center items-center"
+              className="flex items-center justify-center w-full p-2 my-2 text-white bg-gray-900 rounded border-3"
               onClick={() => handleSubmit()}
             >
               {loading ? (
-                <ImSpinner2 className="animate-spin h-5 w-5 mr-3" />
+                <Icon name="spinner" className="w-6 h-6 animate-spin" />
               ) : (
                 "Sign In"
               )}
             </button>
           </div>
-          <p className="text-xs mt-4 text-gray-600 cursor-default">
+          <p className="mt-4 text-xs text-gray-600 cursor-default">
             Don't have an account?{" "}
             <Link href="/" passHref>
-              <span className="text-sm text-gray-900">Create an account</span>
+              <span className="text-sm font-bold text-gray-900">
+                Create an account
+              </span>
             </Link>
           </p>
-          <Toaster position="top-center" />
         </div>
       ) : username !== "" ? (
         <Booking user={username} />
