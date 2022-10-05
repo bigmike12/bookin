@@ -32,10 +32,12 @@ const Home: NextPage = () => {
     e.preventDefault();
     try {
       const res = await axios.post(`/api/auth/register`, form);
-      toast.success(res.data.data.massage);
-      console.log(res.data.data);
+      console.log("bjbj", res?.data?.message);
       setLoading(false);
-      router.push("/auth/login");
+      setTimeout(() => {
+        router.push("/auth/login");
+      }, 2500);
+      toast.success("User Created Successfully");
     } catch (error: any) {
       toast.error(error?.response?.data?.message);
       setForm(initialState);
